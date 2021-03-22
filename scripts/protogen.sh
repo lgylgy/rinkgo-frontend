@@ -6,7 +6,6 @@ OUT_DIR="./src/app/proto"
 PROTOC_GEN_TS_PATH="$(cygpath -m ${PWD})/node_modules/.bin/protoc-gen-ts.cmd"
 
 echo "Compile pstat Service"
-echo ${PROTOC_GEN_TS_PATH}
 protoc \
     --plugin="protoc-gen-ts=${PROTOC_GEN_TS_PATH}" \
     --js_out="import_style=commonjs,binary:${OUT_DIR}" \
