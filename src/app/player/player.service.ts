@@ -14,7 +14,7 @@ export class PlayerService {
         this.client = new PStatServiceClient(environment.apiProxy);
     }
 
-    getHistory(id: number): Promise<object> {
+    getHistory(id: number): Promise<History> {
         return new Promise((resolve, reject) => {
             const request = new Request();
             request.setPlayerid(id);
@@ -23,7 +23,7 @@ export class PlayerService {
                     return reject(err);
                 }
                 if (response) {
-                    resolve(response.toObject());
+                    resolve(response);
                 }
             });
         });
