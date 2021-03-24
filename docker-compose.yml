@@ -3,6 +3,26 @@ version: "3.8"
 services:
 
   rinkgo-frontend:
+    container_name: frontend
     build: .
+    depends_on:
+      - proxy
     ports:
-      - 8080:80
+      - 4200:80
+    networks:
+      - envoymesh
+      
+  proxy:
+    image: envoyproxy/envoy-alpine:v1.17.1
+    environment:
+      NODE_ENV: development
+    ports:
+      - "8080:8080"
+      - "9901:9901"
+    networks:
+      - envoymesh
+    volumes:
+      - ./envoy.yaml:/etc/envoy/envoy.yaml:ro
+
+networks:
+  envoymesh: {}

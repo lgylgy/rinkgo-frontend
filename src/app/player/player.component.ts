@@ -21,7 +21,7 @@ export class PlayerComponent implements OnInit {
   }
 
   getHistory() {
-    this.srv.getHistory(1).then((data: History) => {
+    this.srv.getHistory(50770).then((data: History) => {
       this.player = data.toString();
     });
   }
