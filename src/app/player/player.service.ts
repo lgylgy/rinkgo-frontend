@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
-
-import { PStatServiceClient, ServiceError } from '../proto/pstat_pb_service';
-import { Request, History } from '../proto/pstat_pb';
-import { environment } from '../../environments/environment';
+import { Injectable } from '@angular/core'
+import { PStatServiceClient, ServiceError } from '../proto/pstat_pb_service'
+import { Request, History } from '../proto/pstat_pb'
+import { environment } from '../../environments/environment'
 
 @Injectable({
     providedIn: 'root'

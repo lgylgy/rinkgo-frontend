@@ -1,13 +1,10 @@
-<div>
-  {{ player }}
-
+{{name}}
 <div style="display: block">
   <canvas baseChart
-          [datasets]="barChartData"
-          [labels]="barChartLabels"
-          [options]="barChartOptions"
-          [legend]="barChartLegend"
-          [chartType]="barChartType">
+          [datasets]="chartData"
+          [labels]="chartLabels"
+          [options]="chartOptions"
+          [legend]="chartLegend"
+          [chartType]="chartType">
   </canvas>
-</div>
 </div>

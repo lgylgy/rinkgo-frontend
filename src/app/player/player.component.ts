@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { PlayerService } from './player.service';
-import { Player } from './player';
-import {  ChartType } from 'chart.js';
-import {  History } from '../proto/pstat_pb';
+import { Component, OnInit } from '@angular/core'
+import { PlayerService } from './player.service'
+import { ChartType, ChartOptions, ChartDataSets } from 'chart.js'
+import { History } from '../proto/pstat_pb'
+import { ParseHistory } from './player'
 
 @Component({
   selector: 'app-player',
@@ -11,24 +11,18 @@ import {  History } from '../proto/pstat_pb';
 })
 
 export class PlayerComponent implements OnInit {
-  player?: string;
-
-  public barChartOptions = {
-    scaleShowVerticalLines: false,
+  name: string = ""
+  chartLabels: string[] = []
+  chartType: ChartType = 'bar'
+  chartOptions: ChartOptions = {
     responsive: true
-  };
-
-  public barChartLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  public barChartType: ChartType = 'bar';
-  public barChartLegend = true;  public barChartData = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
-  ];
-  
+  }
+  chartLegend: boolean = true
+  chartData: ChartDataSets[] = []
 
   constructor(
     private srv: PlayerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getHistory();
@@ -36,7 +30,10 @@ export class PlayerComponent implements OnInit {
 
   getHistory() {
     this.srv.getHistory(50770).then((data: History) => {
-      this.player = data.toString();
+      const history = ParseHistory(data)
+      this.name = history.player.name
+      this.chartLabels = history.labels;
+      this.chartData = history.dataSets;
     });
   }
 }
